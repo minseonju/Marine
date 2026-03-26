@@ -18,7 +18,7 @@ import torch.optim as optim
 
 # 1. 데이터 준비
 normal_data = torch.tensor([[1.0, 2.0, 1.0, 1.0], [1.1, 2.1, 0.9, 1.1]], dtype=torch.float32)
-attack_data = torch.tensor([[5.0, 0.5, 0.1, 5.0]], dtype=torch.float32) # 확연히 다른 패턴
+attack_data = torch.tensor([[5.0, 0.5, 0.1, 5.0]], dtype=torch.float32) 
 
 # 2. 모델 정의 (조금 더 깊게)
 class PrototypeAE(nn.Module):
@@ -73,3 +73,6 @@ with torch.no_grad():  # 평가할 때는 모델을 수정할 필요 없다.
 # [!] 경고: 이상 점수(13.0526)가 임계값(2.2519)을 초과했습니다!
 # >>> 시스템 콜 패턴 분석 결과: '이상 행위(Anomaly)' 탐지됨
 ```
+
+
+현재는 4차원의 가상 데이터를 사용했으나, 향후 더 많은 피쳐를 사용해서 다차원 특성 벡터로 시도해볼 예정.
