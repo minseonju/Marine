@@ -85,11 +85,41 @@ sudo systemctl status falco
 
 이렇게 뜨면 성공!!!!!🎇🎇
 
+## 4. Falco 공격 시뮬레이션
+Falco설치를 해봤으니 어떤식으로 이상 행위를 잡아내고 있는가 확인해보자.
 
+새로운 Linux 터미널을 연다.
 
+1. 실시간 로그 감시 (창 A | 이 창은 그대로 띄워두고 로그가 올라오는 걸 지켜보세요)
 
+```
+sudo journalctl –fu falco-modern-bpf
+```
 
+3. 컨테이너 침투 (창 B | 원래 쓰던 창)
 
+```
+sudo cat /etc/shadow
+```
 
+-> 입력 시 창B에서는 cups-browsed:!:19962::::::
+hplip:!:19962::::::
+gnome-remote-desktop:!*:19962:::::: 이런거 올라오고
 
+창 A에서는 이런식으로 경고를 한다.
 
+ 3월 27 03:35:05 myj7378-Standard-PC-i440FX-PIIX-1996 falco[89251]: 03:35:05.162396887: Warning Sensitive file opened for reading by non-trusted program | file=/etc/shadow gparent=sudo ggparent=bash gggparent=sshd evt_type=openat user=root user_uid=0 user_loginuid=1000 process=cat proc_exepath=/usr/bin/cat parent=sudo command=cat /etc/shadow terminal=34818 container_id=host container_name=host container_image_repository= container_image_tag= k8s_pod_name=<NA> k8s_ns_name=<NA>
+
+로그의 각 항목 설명
+
+Warning Sensitive file opened for reading: "신뢰할 수 없는 프로그램이 민감한 파일(비밀번호 파일 등)을 읽으려고 시도함"이라는 탐지 결과입니다. 
+
+file=/etc/shadow: 어떤 파일을 건드렸는지 명확히 보여줍니다. 
+
+process=cat: 파일을 읽기 위해 사용된 명령어(프로세스)입니다. 
+
+user=root: 이 명령어를 실행한 권한입니다. 
+
+container_id=host: 현재는 호스트 환경에서 직접 실행된 것으로 인식되었거나, Falco 설정상 호스트 레벨의 위협으로 분류된 것입니다. 
+
+evt_type=openat: 이게 가장 중요합니다! cat 명령어가 파일을 열기 위해 운영체제에 보낸 실제 시스템 콜 이름입니다. 
