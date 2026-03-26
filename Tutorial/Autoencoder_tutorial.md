@@ -20,7 +20,7 @@ import torch.optim as optim
 normal_data = torch.tensor([[1.0, 2.0, 1.0, 1.0], [1.1, 2.1, 0.9, 1.1]], dtype=torch.float32)  # 이 피쳐는 시스템콜이 들어가면 될거 같습니다.
 attack_data = torch.tensor([[5.0, 0.5, 0.1, 5.0]], dtype=torch.float32) 
 
-# 2. 모델 정의 (조금 더 깊게)
+# 2. 모델 정의 
 class PrototypeAE(nn.Module):
     def __init__(self):
         super(PrototypeAE, self).__init__()
