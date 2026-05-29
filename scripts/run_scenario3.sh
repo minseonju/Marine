@@ -7,10 +7,10 @@ echo "==============================="
 echo "시나리오 3: 파일 다운로드 리버스 쉘"
 echo "==============================="
 
-# 1단계: sysdig 수집 시작
+# 1단계: sysdig 수집 시작 (victim 컨테이너 필터 적용)
 echo "[$(date +%T)] sysdig 수집 시작"
 echo "COLLECTION_START: $(date +%s%N)" > $OUTPUT_DIR/timeline_scenario3.txt
-sudo sysdig -j >> $OUTPUT_DIR/scenario3_raw.json &
+sudo nohup sysdig -j "container.name=victim" >> $OUTPUT_DIR/scenario3_raw.json 2>/dev/null &
 SYSDIG_PID=$!
 sleep 2
 
