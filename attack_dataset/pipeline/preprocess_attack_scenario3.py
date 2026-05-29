@@ -107,7 +107,8 @@ for i in range(len(boundaries) - 1):
     if n_ev > 0:
         vec /= n_ev
 
-    label = 1 if t_w_start >= t_attack_start else 0
+    has_attack_event = bool(np.any(ts_arr[lo:hi] >= t_attack_start))
+    label = 1 if (t_w_start >= t_attack_start or has_attack_event) else 0
     rows.append({
         "window_start_ns": int(t_w_start),
         "total_events":    n_ev,
