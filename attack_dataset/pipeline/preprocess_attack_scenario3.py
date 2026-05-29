@@ -6,7 +6,6 @@ ATTACK_FILE   = "/home/marine/attack_data/scenario3_raw.json"
 TIMELINE_FILE = "/home/marine/attack_data/timeline_scenario3.txt"
 VOCAB_FILE    = "/home/marine/vocab.json"
 OUTPUT_DIR    = "/home/marine/attack_data/preprocessed_scenario3"
-CONTAINER_ID  = "e5c241b5cfb0"
 WINDOW_SEC    = 5
 NS_PER_SEC    = 1_000_000_000
 
@@ -23,13 +22,9 @@ vocab = {
     "trigrams": [tuple(t) for t in vocab_raw["trigrams"]],
     "procs":    vocab_raw["procs"],
 }
-n_sc   = len(vocab["syscalls"])
-n_bg   = len(vocab["bigrams"])
-n_tg   = len(vocab["trigrams"])
-n_proc = len(vocab["procs"])
+n_sc, n_bg, n_tg, n_proc = (len(vocab[k]) for k in ["syscalls","bigrams","trigrams","procs"])
 n_feat = n_sc + n_bg + n_tg + n_proc
 
-# vocab 기반 열 이름 생성 (기존 preprocess.py 방식과 동일)
 feature_names = (
     [f"sc_{sc}"        for sc in vocab["syscalls"]] +
     [f"bg_{a}_{b}"     for a, b in vocab["bigrams"]] +
@@ -57,13 +52,13 @@ t_attack_end   = timeline["ATTACK_END"]
 print(f"   정상 구간 시작: {t_normal_start}")
 print(f"   공격 구간 시작: {t_attack_start}")
 
-# 3. JSON 파싱 (victim 컨테이너만)
+# 3. JSON 파싱 (컨테이너 필터 없이 전체 파싱 - sysdig가 이미 victim만 수집)
 print("[3] JSON 파싱 중...")
 events = []
 with open(ATTACK_FILE) as f:
     for line in f:
         line = line.strip()
-        if not line or CONTAINER_ID not in line:
+        if not line:
             continue
         try:
             ev = json.loads(line)
@@ -75,7 +70,7 @@ with open(ATTACK_FILE) as f:
         except:
             continue
 
-print(f"   victim 이벤트: {len(events)}개")
+print(f"   전체 이벤트: {len(events)}개")
 events.sort(key=lambda x: x["ts_ns"])
 
 # 4. 윈도우 특성 추출
@@ -113,24 +108,32 @@ for i in range(len(boundaries) - 1):
         vec /= n_ev
 
     label = 1 if t_w_start >= t_attack_start else 0
-    rows.append({"window_start_ns": int(t_w_start), "total_events": n_ev, "label": label,
-                 **{feature_names[j]: float(vec[j]) for j in range(n_feat)}})
+    rows.append({
+        "window_start_ns": int(t_w_start),
+        "total_events":    n_ev,
+        "label":           label,
+        **{feature_names[j]: float(vec[j]) for j in range(n_feat)}
+    })
 
 df = pd.DataFrame(rows)
 normal_n = (df["label"] == 0).sum()
 attack_n = (df["label"] == 1).sum()
 print(f"   총 윈도우: {len(df)}개 (정상: {normal_n}, 공격: {attack_n})")
 
-# 5. 저장 (특성만 있는 CSV + 라벨 포함 전체 CSV + NPY)
+# 5. 저장
 print("[5] 저장 중...")
-feat_only = df[feature_names]
-feat_only.to_csv(f"{OUTPUT_DIR}/features_scenario3.csv", index=False)
+# 특성만 있는 버전 (모델 입력용)
+feat_cols = [c for c in df.columns if c not in ['window_start_ns','total_events','label']]
+df[feat_cols].to_csv(f"{OUTPUT_DIR}/features_scenario3.csv", index=False)
 
+# 라벨 포함 전체 버전 (평가용)
 df.to_csv(f"{OUTPUT_DIR}/scenario3_features_labeled.csv", index=False)
 
-np.save(f"{OUTPUT_DIR}/features_scenario3.npy", feat_only.values.astype(np.float32))
+# NPY
+np.save(f"{OUTPUT_DIR}/features_scenario3.npy",
+        df[feat_cols].values.astype(np.float32))
 
 print(f"\n완료!")
-print(f"   features_scenario3.csv     — 특성만 {feat_only.shape}")
-print(f"   scenario3_features_labeled.csv — 메타+특성+라벨 {df.shape}")
-print(f"   features_scenario3.npy     — shape {feat_only.values.shape}")
+print(f"   features_scenario3.csv      — {df[feat_cols].shape}")
+print(f"   scenario3_features_labeled.csv — {df.shape}")
+print(f"   features_scenario3.npy      — shape {df[feat_cols].values.shape}")
