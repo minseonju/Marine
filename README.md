@@ -62,3 +62,23 @@
   ├─────────┼──────┼──────────────────┤
   │ CAE     │      │                  │
   └─────────┴──────┴──────────────────┘
+
+  디렉터리 구조
+
+  Marine/
+  ├── attack_dataset/
+  │   ├── raw_attack/            # 원시 syscall 로그 CSV
+  │   ├── preprocessed_attack/   # 전처리 특성 (CSV + NPY)
+  │   └── preprocess_pipeline.py
+  ├── model/                     # 이상 탐지 모델 (LSTM-AE, CAE 등)
+  └── README.md
+  사용법
+
+  # 1) 데이터 수집 (VM에서)
+  bash run_scenarioN.sh
+  # 2) 전처리
+  python3 attack_dataset/preprocess_pipeline.py --scenario N
+  # 3) 모델 학습/평가
+  # <!-- 채우기 -->
+
+  팀
