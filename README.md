@@ -1,5 +1,4 @@
-  # Marine — 컨테이너 시스템 콜 기반 이상 탐지 (Container Syscall Anomaly
-  Detection)
+  # Marine — 컨테이너 시스템 콜 기반 이상 탐지 (Container Syscall Anomaly Detection)
 
   <!-- 한 줄 소개: 이 프로젝트가 무엇을 하는지 1~2문장으로 채우기 -->
   컨테이너 환경에서 수집한 시스템 콜(syscall) 시퀀스를 학습하여 정상 행위와 공격
