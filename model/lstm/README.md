@@ -167,6 +167,7 @@ MSE 복원 오차 계산
 lstm/
 ├── LSTM_ADFA-LD_.ipynb          # ADFA-LD 프로토타입 실험
 ├── LSTM_ae.ipynb                # 실제 환경 최종 모델
+├── LSTM_ae_exfiltration.ipynb   # 정답 레이블 x exfiltration 실험 
 ├── LSTM_ae_m1m2_combined.ipynb  # M1+M2 합산 실험
 └── README.md
 ```
