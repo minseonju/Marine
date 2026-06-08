@@ -5,6 +5,11 @@
    행위를
   구분하는 이상 탐지(Anomaly Detection) 연구 프로젝트입니다.
 
+  본 프로젝트는 Sock Shop 마이크로서비스 환경에서 정상 트래픽을 수집하고,
+Reverse Shell, Crypto Mining, Data Exfiltration 등의 공격 데이터와 비교하여
+AutoEncoder 기반 이상 탐지 모델의 탐지 가능성을 평가합니다.
+
+
   ## 목차
   - [개요](#개요)
   - [데이터셋](#데이터셋)
