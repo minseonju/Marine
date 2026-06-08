@@ -111,17 +111,6 @@ MSE 복원 오차 계산
 
 > Falco가 탐지하지 못한 Mimicry Attack에서 LSTM-AE 단독 탐지
 
-### 실제 환경 데이터 — M1 / M2
-
-| Data | Class | Precision | Recall | F1-Score |
-|---|---|---|---|---|
-| M1 | Normal | 29% | 50% | 36% |
-| M1 | Attack | 56% | 33% | 42% |
-| M2 | Normal | 77% | 92% | 84% |
-| M2 | Attack | 95% | 86% | 90% |
-
-> M1은 약 6,800행으로 정상 학습 데이터(약 370만 행) 대비 0.2% 수준으로 데이터 부족
-
 ### Exfiltration (레이블 없음)
 
 | 전체 시퀀스 | 탐지 시퀀스 | 탐지율 |
