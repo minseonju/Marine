@@ -28,10 +28,11 @@ AutoEncoder 기반 이상 탐지 모델의 탐지 가능성을 평가합니다.
 syscall 시계열 데이터를 기반으로, AutoEncoder 계열 비지도 학습 모델을 활용하여
 레이블 없이도 정상 패턴을 학습하고 이상 행위를 탐지하는 시스템을 구현한다.
 
-   - 수집: sysdig (eBPF 기반) → 컨테이너별 syscall 실시간 수집
-   - 전처리: 시간 윈도우 단위 syscall 빈도 벡터 변환
-   - 탐지: LSTM-AE / AE 모델의 복원 오차 기반 이상 탐지
-   - 비교: 규칙 기반 도구 Falco와 성능 비교
+- 수집: `sysdig`를 이용해 컨테이너 단위 system call 수집
+- 전처리: syscall 빈도 기반 histogram feature와 syscall 순서 기반 N-gram feature 생성
+- 학습: 정상 데이터만 사용하여 AutoEncoder 학습
+- 탐지: 입력 데이터를 복원했을 때 발생하는 reconstruction error를 기준으로 이상 여부 판단
+- 비교: Falco와 같은 rule 기반 런타임 보안 도구와 탐지 결과 비교
 
   ## 데이터셋
   수집 환경과 라벨링 체계는 다음과 같습니다.
