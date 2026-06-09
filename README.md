@@ -124,7 +124,7 @@ Marine/
   ### 2) 전처리  
   `python3 attack_dataset/preprocess_pipeline.py --scenario N`  
   ### 3) 모델 학습/평가  
-  # <!-- 채우기 -->
+  모델 폴더의 ipynb 확인
 
 ## 팀
 | 이름 | 역할 | 담당 업무 | GitHub |
