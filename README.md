@@ -119,11 +119,11 @@ Marine/
 
 ## 사용법
 
-  1) 데이터 수집 (VM에서)
-  bash run_scenarioN.sh
-  2) 전처리
-  python3 attack_dataset/preprocess_pipeline.py --scenario N
-  3) 모델 학습/평가
+  ### 1) 데이터 수집 (VM에서)  
+  bash run_scenarioN.sh  
+  ### 2) 전처리  
+  python3 attack_dataset/preprocess_pipeline.py --scenario N  
+  ### 3) 모델 학습/평가  
   # <!-- 채우기 -->
 
   팀
