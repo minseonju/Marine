@@ -76,14 +76,48 @@ syscall 시계열 데이터를 기반으로, AutoEncoder 계열 비지도 학습
 
 ## 디렉터리 구조
 
-  Marine/
-  ├── attack_dataset/
-  │   ├── raw_attack/            # 원시 syscall 로그 CSV
-  │   ├── preprocessed_attack/   # 전처리 특성 (CSV + NPY)
-  │   └── preprocess_pipeline.py
-  ├── model/                     # 이상 탐지 모델 (LSTM-AE, CAE 등)
-  └── README.md
-  사용법
+프로젝트의 주요 파일 및 디렉터리 구성은 다음과 같습니다.
+
+```text
+Marine/
+├── Tutorial/                         # 프로젝트 실행 및 실습 관련 자료
+├── attack_dataset/                   # 공격 데이터셋 및 전처리 파이프라인
+│   ├── raw_attack/                   # 원시 syscall 로그 CSV
+│   ├── preprocessed_attack/          # 전처리된 특성 데이터(CSV, NPY)
+│   ├── pipeline/                     # 데이터 처리 파이프라인 관련 파일
+│   ├── scenarios/                    # 공격 시나리오 관련 파일
+│   └── preprocess_pipeline.py        # 공격 데이터 전처리 스크립트
+├── model/                            # 이상 탐지 모델 코드
+│   ├── AE_model/                     # AutoEncoder 기반 모델
+│   ├── lstm/                         # LSTM 기반 모델
+│   └── text.md                       # 모델 관련 메모/문서
+├── scripts/                          # 공격 및 Sock Shop 실행 스크립트
+│   ├── run_scenario2.sh
+│   ├── run_scenario3.sh
+│   ├── run_scenario4.sh
+│   ├── run_scenario5.sh
+│   ├── run_sockshop_method1.sh
+│   └── run_sockshop_method2.sh
+├── scaler.pkl                        # 전처리/정규화에 사용된 scaler 객체
+├── vocab.json                        # syscall 및 feature vocabulary
+└── README.md                         # 프로젝트 설명 문서
+```
+
+각 디렉터리의 역할은 다음과 같습니다.
+
+| 경로 | 설명 |  
+|---|---|  
+| `Tutorial/` | 프로젝트 실행 또는 실습 과정에서 사용하는 자료 |  
+| `attack_dataset/raw_attack/` | sysdig 등으로 수집한 원시 syscall 로그 CSV |  
+| `attack_dataset/preprocessed_attack/` | 모델 입력용으로 전처리된 CSV/NPY 특성 데이터 |  
+| `attack_dataset/preprocess_pipeline.py` | raw attack 로그를 모델 입력 형식으로 변환하는 전처리 스크립트 |  
+| `model/AE_model/` | AutoEncoder 기반 이상 탐지 모델 |  
+| `model/lstm/` | LSTM 기반 이상 탐지 모델 |  
+| `scripts/` | 공격 시나리오 및 Sock Shop 데이터 수집 실행 스크립트 |  
+| `scaler.pkl` | 학습/추론 시 동일한 스케일링을 적용하기 위한 객체 |  
+| `vocab.json` | syscall 및 n-gram feature 매핑 정보 |  
+
+## 사용법
 
   # 1) 데이터 수집 (VM에서)
   bash run_scenarioN.sh
