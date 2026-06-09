@@ -7,3 +7,9 @@
 | raw_sockshop_m1.csv | Sock Shop M1 환경 syscall 로그 | O |
 | raw_sockshop_m2.csv | Sock Shop M2 환경 syscall 로그 | X 용량 초과 |
 | raw_events | Falco 수집 원본 이벤트 로그 | X 용량 초과 |
+
+## 링크 
+
+raw_events.csv : https://drive.google.com/file/d/1vmhfgYO_cBapYIq1SR5f4E2Rpk5oB8D-/view?usp=drive_link
+
+raw_sockshop_m2.csv : https://drive.google.com/file/d/13totPETDr3dhQIXSmX7UKxtW9pd1j6fo/view?usp=drive_link
