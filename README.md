@@ -36,6 +36,7 @@ syscall 시계열 데이터를 기반으로, AutoEncoder 계열 비지도 학습
 - 비교: Falco와 같은 rule 기반 런타임 보안 도구와 탐지 결과 비교
 
 ## 전체 아키텍쳐
+![전체 아키텍쳐](https://github.com/minseonju/Marine/blob/main/그림1.png)
 
   ## 데이터셋
   수집 환경과 라벨링 체계는 다음과 같습니다.
