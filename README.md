@@ -126,4 +126,10 @@ Marine/
   ### 3) 모델 학습/평가  
   # <!-- 채우기 -->
 
-  팀
+## 팀
+| 이름 | 역할 | 담당 업무 | GitHub |
+|---|---|---|---|
+| 백하준 | 팀장 | 프로젝트 기획, 서버환경 구현 | [@KIMGEEK](https://github.com/KIMGEEK) |
+| 민선주 | 데이터 전처리 | 샘플데이터 수집, 데이터 전처리, 공격 시나리오 구현 | [@minseonju](https://github.com/minseonju) |
+| 임수환 | 모델 개발 | LSTM-AE / AE 모델 학습 및 평가 (시계열) | [@limlimsu](https://github.com/limlimsu) |
+| 문예준 | 모델 개발 | LSTM-AE / AE 모델 학습 및 평가 () | [@DaeYejun2](https://github.com/DaeYejun2) |
