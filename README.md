@@ -129,7 +129,7 @@ Marine/
 ## 팀
 | 이름 | 역할 | 담당 업무 | GitHub |
 |---|---|---|---|
-| 백하준 | 팀장 | 프로젝트 기획, 서버환경 구현 | [@KIMGEEK](https://github.com/KIMGEEK) |
-| 민선주 | 데이터 전처리 | 샘플데이터 수집, 데이터 전처리, 공격 시나리오 구현 | [@minseonju](https://github.com/minseonju) |
+| 백하준 | 팀장 | 프로젝트 기획, 서버환경 구현, 샘플데이터(크립토마이닝, 데이터 유출) 수집 | [@KIMGEEK](https://github.com/KIMGEEK) |
+| 민선주 | 데이터 전처리 | 샘플데이터(리버스셸, 권한상승) 수집, 데이터 전처리, 공격 시나리오 구현 | [@minseonju](https://github.com/minseonju) |
 | 임수환 | 모델 개발 | LSTM-AE / AE 모델 학습 및 평가 (시계열) | [@limlimsu](https://github.com/limlimsu) |
-| 문예준 | 모델 개발 | LSTM-AE / AE 모델 학습 및 평가 () | [@DaeYejun2](https://github.com/DaeYejun2) |
+| 문예준 | 모델 개발 | LSTM-AE / AE 모델 학습 및 평가 (데이터 분석 총괄) | [@DaeYejun2](https://github.com/DaeYejun2) |
